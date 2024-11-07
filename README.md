@@ -118,3 +118,11 @@ You can customize several parameters of the game, such as:
 * GPIO errors: Check if the GPIO pins are correctly connected and set up.
 * Game Performance: Adjust the fps value or optimize image sizes for better performance on your Raspberry Pi.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Contributions -->
+## Created by
+<a href="https://github.com/S-rita/Chubby_Cat/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=S-rita/Chubby_Cat" alt="contrib.rocks image" />
+</a>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
