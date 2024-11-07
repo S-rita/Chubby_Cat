@@ -4,11 +4,22 @@
 <br />
 <div align="center">
   <a href="https://github.com/S-rita/Chubby_Cat">
-    <img src="img/cat1.PNG" alt="Logo" width="80" height="80">
+    <img src="img/cat1.PNG" alt="Logo" width="120" height="96">
   </a>
 
   <h3 align="center">Chubby Cat</h3>
-
+  <p align="center">
+    An imaginative adaptation of the classic Flappy Bird game!
+    <br />
+    <a href="https://github.com/S-rita/Chubby_Cat"><strong>Explore the program »</strong></a>
+    <br />
+    <br />
+    <a href="https://drive.google.com/file/d/1GP1ge3sabx0YefPhYAnaxp_8LnZK4FVE/view?usp=sharing">View Project Proposal</a>
+    ·
+    <a href="">Watch the tutorial</a>
+    ·
+    <a href="">View Project Report</a>
+  </p>
 </div>
 
 
