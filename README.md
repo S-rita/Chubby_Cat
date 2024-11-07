@@ -81,6 +81,7 @@ sudo apt-get install python3 python3-pygame
 ## Game Controls
 * Start Game: Press the connected switch.
 * Jump: Press the switch again to make the cat jump.
+* Adjust Speed: Tilt the MPU-6050.
 * Restart Game: Use the switch when the game-over screen is displayed.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -107,6 +108,7 @@ sudo apt-get install python3 python3-pygame
 <!-- Customization -->
 ## Customization
 You can customize several parameters of the game, such as:
+* Chubby Cat size: Modify the size of the player character for varying difficulty levels.
 * Tower Frequency and Gap: Modify the spacing and frequency of obstacles.
 * Scrolling Speed: Adjust the game's scrolling speed for varying difficulty levels.
 * Graphics: Replace images for the cat, towers, and background for a different visual theme.
