@@ -60,6 +60,7 @@ The Chubby Cat Game is a Pygame-based project designed for the Raspberry Pi plat
 ## Requirements
 * Raspberry Pi with Python installed
 * Pygame library (`pip install pygame`)
+* Numpy library (`pip install numpy`)
 * SMBus library (`smbus`)
 * GPIO access (e.g., `RPi.GPIO`)
 * MPU-6050 accelerometer module
