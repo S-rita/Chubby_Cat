@@ -127,4 +127,6 @@ You can customize several parameters of the game, such as:
   <img src="https://contrib.rocks/image?repo=S-rita/Chubby_Cat" alt="contrib.rocks image" />
 </a>
 
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
