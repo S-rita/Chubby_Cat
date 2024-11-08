@@ -4,6 +4,7 @@ import random
 import smbus
 import time
 import RPi.GPIO as GPIO
+import numpy as np
 
 # Initialize Pygame
 pygame.init()
@@ -42,9 +43,9 @@ ground_img = pygame.image.load('/home/user/game/img/ground.PNG')
 button_img = pygame.image.load('/home/user/game/img/restart.png')
 
 # GPIO pin setting
-# 1. 7-segments display (segments[0] and segments[1] are a-f for tens and ones respectively)
+# 1. 7-segments LED (segments[0] and segments[1] are a-f for tens and ones respectively)
 segments = [[10, 9, 25, 24, 23, 22, 27],[19, 26, 20, 16, 12, 13, 6]]
-# 2. Digit control of 7-segments display (tens and ones)
+# 2. Digit control of 7-segments LED (tens and ones)
 digit_pins = [8,21]
 # 3. Buzzer
 BUZZER_PIN = 4
@@ -52,6 +53,12 @@ BUZZER_PIN = 4
 SWITCH_PIN = 17
 # 5. LED
 LED_PIN = 18
+# 6. MPU-6050
+MPU6050_ADDR = 0x68
+PWR_MGMT_1 = 0x6B
+ACCEL_YOUT_H = 0x3D
+ACCEL_YOUT_L = 0x3E
+MPU6050_LSBG = 16384.0
 
 # Segment configurations for displaying digits 0-9
 digit_segments = [
@@ -89,18 +96,23 @@ GPIO.output(LED_PIN, GPIO.LOW)
 # Setup switch as input
 GPIO.setup(SWITCH_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-# MPU-6050 setup
-MPU6050_ADDR = 0x68
-PWR_MGMT_1 = 0x6B
-ACCEL_YOUT_H = 0x3D
-ACCEL_YOUT_L = 0x3E
-MPU6050_LSBG = 16384.0
-
 # Initialize the I2C bus
 bus = smbus.SMBus(1)
 bus.write_byte_data(MPU6050_ADDR, PWR_MGMT_1, 0)
 
-#--------------- End of initial part ---------------#
+# Callback function for button press
+def handle_button_press(channel):
+    global flying, game_over
+    if game_over:
+        game_over = False
+        reset_game()
+        flying = False
+        GPIO.output(BUZZER_PIN, GPIO.LOW)  # Turn off the buzzer
+    elif not flying:
+        flying = True
+
+# Setup interrupt for button press
+GPIO.add_event_detect(SWITCH_PIN, GPIO.RISING, callback=handle_button_press, bouncetime=200)
 
 # Function to draw text on screen play
 def draw_text(text, font, text_col, x, y):
@@ -302,13 +314,19 @@ while run:
         accel_y = get_accel_y()
         if accel_y < -0.1:  # Threshold for left movement
             background_scroll += scroll_speed
-            for tower in tower_group:
-                tower.rect.x += scroll_speed
+            # SIMD-like operation using NumPy to move towers
+            tower_positions = np.array([tower.rect.x for tower in tower_group.sprites()])
+            tower_positions += scroll_speed
+            for tower, new_x in zip(tower_group, tower_positions):
+                tower.rect.x = new_x
             ground_scroll += scroll_speed
         elif accel_y > 0.1:  # Threshold for right movement and increase speed
             background_scroll -= (scroll_speed*accel_y*5)
-            for tower in tower_group:
-                tower.rect.x -= scroll_speed
+            # SIMD-like operation using NumPy to move towers
+            tower_positions = np.array([tower.rect.x for tower in tower_group.sprites()])
+            tower_positions -= scroll_speed
+            for tower, new_x in zip(tower_group, tower_positions):
+                tower.rect.x = new_x
             ground_scroll -= scroll_speed
 
     # Background and ground scroll handling
