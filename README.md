@@ -16,7 +16,7 @@
     <br />
     <a href="https://drive.google.com/file/d/1GP1ge3sabx0YefPhYAnaxp_8LnZK4FVE/view?usp=sharing">View Project Proposal</a>
     ·
-    <a href="">Watch the tutorial</a>
+    <a href="https://drive.google.com/file/d/1_002DVkKLYAHfpzDVGAPkRKRnA6RUdug/view?usp=sharing">Watch the tutorial</a>
     ·
     <a href="">View Project Report</a>
   </p>
